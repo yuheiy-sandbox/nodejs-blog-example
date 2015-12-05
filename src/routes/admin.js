@@ -42,7 +42,7 @@ router.post('/login', (req, res) => {
     return;
   }
 
-  res.render('admin/login', { error: true });
+  res.render('admin/login', { error: true, csrfToken: req.csrfToken() });
 });
 
 router.get('/logout', (req, res) => {
@@ -59,7 +59,7 @@ router.get('/posts/new', (req, res) => {
     return;
   }
 
-  res.render('admin/login', { csrfToken: req.csrfToken() });
+  res.redirect('/admin/login');
 });
 
 router.post('/posts/create', (req, res) => {
@@ -86,7 +86,7 @@ router.get('/posts/:id/edit', (req, res) => {
     return;
   }
 
-  res.render('admin/login', { csrfToken: req.csrfToken() });
+  res.redirect('/admin/login');
 });
 
 router.put('/posts/:id', (req, res) => {
