@@ -46,12 +46,20 @@ router.post('/login', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-  req.session.destroy();
+  if (req.session.user) {
+    req.session.destroy();
+  }
+
   res.redirect('/');
 });
 
 router.get('/posts/new', (req, res) => {
-  res.render('admin/post', { csrfToken: req.csrfToken() });
+  if (req.session.user) {
+    res.render('admin/post', { csrfToken: req.csrfToken() });
+    return;
+  }
+
+  res.render('admin/login', { csrfToken: req.csrfToken() });
 });
 
 router.post('/posts/create', (req, res) => {
@@ -66,13 +74,19 @@ router.post('/posts/create', (req, res) => {
 });
 
 router.get('/posts/:id/edit', (req, res) => {
-  const Post = mongoose.model('Post');
+  if (req.session.user) {
+    const Post = mongoose.model('Post');
 
-  Post.findById(req.params.id)
-    .then(post => {
-      post.date = moment(parseInt(post.date, 10)).format('ll');
-      res.render('admin/post', { post, csrfToken: req.csrfToken() });
-    });
+    Post.findById(req.params.id)
+      .then(post => {
+        post.date = moment(parseInt(post.date, 10)).format('ll');
+        res.render('admin/post', { post, csrfToken: req.csrfToken() });
+      });
+
+    return;
+  }
+
+  res.render('admin/login', { csrfToken: req.csrfToken() });
 });
 
 router.put('/posts/:id', (req, res) => {

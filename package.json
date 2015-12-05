@@ -8,8 +8,16 @@
     "dev": "foreman start -f Procfile_dev & gulp watch",
     "postinstall": "gulp"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yuheiy/nodejs-blog-example.git"
+  },
   "author": "Yuhei Yasuda <yuhei.yasuda1003@gmail.com> (http://yhey.me/)",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yuheiy/nodejs-blog-example/issues"
+  },
+  "homepage": "https://github.com/yuheiy/nodejs-blog-example#readme",
   "dependencies": {
     "babel-preset-es2015": "^6.3.13",
     "body-parser": "^1.14.1",
