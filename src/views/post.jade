@@ -1,0 +1,16 @@
+extends _layout
+
+block content
+  main
+    header
+      include _navigation
+
+    article
+      h1
+        = post.title
+        | 
+        small= post.date
+
+      div= post.body
+
+    include _footer

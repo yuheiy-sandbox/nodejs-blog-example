@@ -1,0 +1,14 @@
+extends _layout
+
+block title
+  title= message
+
+block content
+  main
+    include _navigation
+
+    h1= message
+    p
+      a(href='/') Back to Index
+
+    include _footer

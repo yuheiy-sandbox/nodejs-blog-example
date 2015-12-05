@@ -1,0 +1,77 @@
+extends ../_layout
+
+block title
+  title= post ? 'Edit Post' : 'Create Post'
+
+block content
+  main
+    header
+      include ../_navigation
+      h1= post ? 'Edit Post' : 'Create Post'
+      p
+        a(href='/admin/') Back to Dashboard
+
+    form(
+      method='post',
+      action='/admin/posts/' + (post ? post._id + '?_method=put' : 'create')
+    )
+      input(
+        type='hidden',
+        name='_csrf',
+        value= csrfToken
+      )
+
+      if post
+        p
+          | Posted at : 
+          = post.date
+
+      p
+        label(for='title') Title
+        br
+        input(
+          type='text',
+          id='title',
+          name='title',
+          value= post ? post.title : null,
+          placeholder='Post title',
+          tabindex='1',
+          required
+        )
+
+      p
+        label(for='body') body
+        br
+        textarea(
+          id='body',
+          name='body',
+          rows='4',
+          cols='27',
+          placeholder='Post body',
+          tabindex='2',
+          required
+        )= post ? post.body : null
+
+      p
+        button(
+          type='submit',
+          tabindex='3'
+        )= post ? 'Update' : 'Post'
+
+    if post
+      form(
+        method='post',
+        action='/admin/posts/' + post._id + '?_method=delete'
+      )
+        input(
+          type='hidden',
+          name='_csrf',
+          value= csrfToken
+        )
+
+        button(
+          type='submit',
+          tabindex='4'
+        ) Delete
+
+    include ../_footer

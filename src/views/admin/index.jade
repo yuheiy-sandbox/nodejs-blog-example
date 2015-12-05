@@ -1,0 +1,43 @@
+extends ../_layout
+
+block title
+  title Dashboard
+
+block content
+  main
+    header
+      include ../_navigation
+      h1 Dashboard
+      p
+        | You are logged in as 
+        strong= username
+        | .
+
+    article
+      h2 Create a new Article
+
+      p
+        a(href='/admin/posts/new') Write a new article
+
+      hr
+
+      h2 Edit Articles
+
+      if posts.length
+        ul
+          each post in posts
+            li
+              a(href='/admin/posts/' + post.id + '/edit')= post.title
+
+      else
+        p There is no posts.
+
+      hr
+
+      h2 Logout
+
+      p
+        a(href='/admin/logout')
+          button Logout
+
+    include ../_footer

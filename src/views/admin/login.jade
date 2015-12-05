@@ -1,0 +1,55 @@
+extends ../_layout
+
+block title
+  title Login
+
+block content
+  main
+    header
+      include ../_navigation
+      h1 Login
+
+    form(
+      method='post',
+      action='/admin/login'
+    )
+      input(
+        type='hidden',
+        name='_csrf',
+        value= csrfToken
+      )
+
+      p
+        label(for='username') User name
+        br
+        input(
+          type='text',
+          id='username',
+          name='username',
+          placeholder='Your user name here',
+          tabindex='1',
+          required
+        )
+
+      p
+        label(for='password') Password
+        br
+        input(
+          type='password',
+          id='password',
+          name='password',
+          placeholder='Your password here',
+          tabindex='2',
+          required
+        )
+
+      if error
+        p.error You failed to login.
+
+      p
+        button(
+          type='submit',
+          tabindex='3'
+        ) Login
+
+      include ../_footer

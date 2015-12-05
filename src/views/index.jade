@@ -1,0 +1,26 @@
+extends _layout
+
+block content
+  main
+    header
+      include _navigation
+
+      h1 node.js blog example
+      p
+        | Blog system for minimalist. 
+        a(href='https://github.com/yuheiy/nodejs-blog-example') All of source code is here.
+
+    if posts.length
+      each post in posts
+        article
+          h2
+            a(href='/posts/' + post.id)= post.title
+            | 
+            small= post.date
+
+          div= post.body
+
+    else
+      p There is no posts.
+
+    include _footer
